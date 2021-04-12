@@ -1,30 +1,31 @@
 import React from 'react';
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { seconds: 0 };
+    }
+
+    tick() {
+        this.setState(state => ({
+            seconds: state.seconds + 1
+        }));
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(() => this.tick(), 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
     render() {
         return (
-            <div>
-                <nav style={{ background: "#666" }}>
-                    <ul style={{ display: 'flex', listStyle: 'none' }}>
-                        <li style={{ margin: 10 }}><a href="/" style={{ color: "#fff", textDecoration: 'none' }}>Home</a></li>
-                        <li style={{ margin: 10 }}><a href="/about" style={{ color: "#fff", textDecoration: 'none' }}>About</a></li>
-                    </ul>
-                </nav>
-
-                <header style={{ height: 200, background: "#ddd" }}>
-                    header
-                </header>
-
-                <div id="main" style={{ height: 300, background: "#eee" }}>
-                    main
-                </div>
-
-                <footer style={{ height: 100, background: "#666", color: "#fff" }}>
-                    footer
-                </footer>
-            </div>
+          <div>
+            Seconds: {this.state.seconds}
+          </div>
         );
-    }
+      }
 }
-
 export default App;
